@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block page_content %}
+{% load static %}
+<br>
+<h1>Experience</h1>
+<hr class="hr-ruler-blue">
+<br class="header-break">
+<div class="row">
+    <div class="col-sm-8 mb-5">
+        <h3 class="text-primary-custom">Jobs <i class="fas fa-briefcase"></i></h3>
+        <br>
+        <div id="accordion">
+            {% for job in experiences %}
+            <div class="card mb-3">
+                <div class="card-header" id="heading{{ forloop.counter }}" data-parent="#accordion">
+                        <h5 class="mb-0">
+                            {{ job.t_position }}
+                        </h5>
+                        <h5 class="text-muted font-italic">
+                            at <a href="{{ job.t_company_url }}" target="_blank">{{ job.t_company }}</a>
+                            from {{ job.d_start|date:"F" }} {{ job.d_start.year}} -
+                                {% if job.d_end is not null %}
+                                    {{ job.d_end|date:"F" }} {{ job.d_end.year }}
+                                {% else %}
+                                    Present
+                                {% endif %}
+                        </h5>
+                    <p>{{ job.t_overview }}</p>
+                    <a id="show-details-text{{ forloop.counter }}" class="collapsed" data-toggle="collapse" href="#collapse{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}">Show More</a>
+                </div>
+                <div id="collapse{{ forloop.counter }}" class="collapse" aria-labelledby="heading{{ forloop.counter }}" data-parent="#accordion">
+                    <div class="card-body">
+                        <h6><u>Accomplishments</u></h6>
+                        {% for accomplishment in accomplishments %}
+                            {% if job.id == accomplishment.n_experience_id %}
+                                <p>● {{ accomplishment.t_accomplishment }}</p>
+                            {% endif %}
+                        {% endfor %}
+                        <h6><u>Responsibilities</u></h6>
+                        {% for responsibility in responsibilities %}
+                            {% if job.id == responsibility.n_experience_id %}
+                                <div class="text-primary-custom"><strong>{{ responsibility.t_title }}</strong></div>
+                                <p>{{ responsibility.t_responsibility }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-sm-4 mb-5">
+        <!-- Skills -->
+        <h3 class="text-primary-custom">Skills <i class="fas fa-keyboard"></i></h3>
+        <br>
+        <h5>Used professionally:</h5>
+        <p>
+            <div class="text-muted font-italic"><strong>Languages</strong></div>
+            {% for professionalSkillsLanguage in professionalSkillsLanguages %}
+                {{ professionalSkillsLanguage.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            <div class="text-muted font-italic"><strong>Platforms</strong></div>
+            {% for professionalSkillsPlatform in professionalSkillsPlatforms %}
+                {{ professionalSkillsPlatform.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            <div class="text-muted font-italic"><strong>Software</strong></div>
+            {% for professionalSkillsSoftware in professionalSkillsSoftwares %}
+                {{ professionalSkillsSoftware.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            <div class="text-muted font-italic"><strong>Databases</strong></div>
+            {% for professionalSkillsDatabase in professionalSkillsDatabases %}
+                {{ professionalSkillsDatabase.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        <h5>Used personally:</h5>
+        <p>
+            <!-- TODO need to check if these exist before displaying -->
+            <div class="text-muted font-italic"><strong>Languages</strong></div>
+            {% for personalSkillsLanguage in personalSkillsLanguages %}
+                {{ personalSkillsLanguage.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            <div class="text-muted font-italic"><strong>Frameworks</strong></div>
+            {% for personalSkillsFramework in personalSkillsFrameworks %}
+                {{ personalSkillsFramework.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            <div class="text-muted font-italic"><strong>Platforms</strong></div>
+            {% for personalSkillsPlatform in personalSkillsPlatforms %}
+                {{ personalSkillsPlatform.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            <div class="text-muted font-italic"><strong>Software</strong></div>
+            {% for personalSkillsSoftware in personalSkillsSoftwares %}
+                {{ personalSkillsSoftware.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            <div class="text-muted font-italic"><strong>Databases</strong></div>
+            {% for personalSkillsDatabase in personalSkillsDatabases %}
+                {{ personalSkillsDatabase.t_skill }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        <hr class="hr-ruler-gray">
+        <!-- Certifications -->
+        <h3 class="text-primary-custom">Certifications <i class="fas fa-certificate"></i></h3>
+        <br>
+            {% for certification in certifications %}
+                <h5>
+                    <img src="{{ certification.t_certification_path.url }}" alt="" width="25%">
+                    {{ certification.t_certification }}
+                </h5>
+            {% endfor %}
+        <hr class="hr-ruler-gray">
+        <h3 class="text-primary-custom">Education <i class="fas fa-graduation-cap"></i></h3>
+        <br>
+        {% for degree in education %}
+            <h5>{{ degree.t_degree }}</h5>
+            <h5 class="text-muted font-italic">{{ degree.t_university }}</h5>
+            <h5 class="text-muted font-italic">{{ degree.t_city }}, {{ degree.c_state }}, {{ degree.t_country }}</h5>
+            <h5 class="text-muted font-italic">{{ degree.d_start|date:"F" }} {{ degree.d_start.year}} -
+                {% if degree.d_end is not null %}
+                    {{ degree.d_end|date:"F" }} {{ degree.d_end.year }}
+                {% else %}
+                    Present
+                {% endif %}
+            </h5>
+            <br>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

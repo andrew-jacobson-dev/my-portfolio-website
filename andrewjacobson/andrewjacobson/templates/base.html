@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/98e43811f5.js" crossorigin="anonymous"></script>
+    <title>andrewjacobson.dev</title>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-lg">
+       <div class="container">
+           <a class="navbar-brand" href="{% url 'about_index' %}"><img src="/media/images/AJ.png" width="10%"> andrewjacobson.dev</a>
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <i class="fas fa-bars" style="color:white;"></i>
+           </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="navbar-nav ml-auto">
+               <li class="nav-item">
+                 <a class="nav-link" href="{% url 'about_index' %}">About</a>
+               </li>
+               <li class="nav-item">
+                 <a class="nav-link" href="{% url 'myprojects_index' %}">Projects</a>
+               </li>
+               <li class="nav-item">
+                 <a class="nav-link" href="{% url 'myexperience_index' %}">Experience</a>
+               </li>
+               <li class="nav-item">
+                 <a class="nav-link" href="{% url 'contact_index' %}">Contact</a>
+               </li>
+             </ul>
+           </div>
+       </div>
+    </nav>
+
+    <div class="container">
+         {% block page_content %}{% endblock %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'myexperience/myexperience.js' %}"/>
+    <script type="text/javascript" src="{% static 'contact/contact.js' %}"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  </body>
+  <footer class="footer">
+      <div class="container">
+          <hr class="hr-ruler-blue">
+          <div class="row mb-1">
+            <div class="col-sm-8">
+                <h5>andrewjacobson.dev</h5>
+                <p>Updated June 2020</p>
+            </div>
+            <div class="col-sm-4"">
+              <h5>Navigation</h5>
+              <ul class="list-unstyled">
+                  <li class="footer-link">
+                    <a href="{% url 'about_index' %}">About</a>
+                  </li>
+                  <li class="footer-link">
+                    <a href="{% url 'myprojects_index' %}">Projects</a>
+                  </li>
+                  <li class="footer-link">
+                    <a href="{% url 'myexperience_index' %}">Experience</a>
+                  </li>
+                  <li class="footer-link">
+                    <a href="{% url 'contact_index' %}">Contact</a>
+                  </li>
+            </ul>
+            </div>
+          </div>
+      </div>
+  </footer>
+</html>

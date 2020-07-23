@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block page_content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'contact/contact.css' %}"/>
+<br>
+<h1>Contact</h1>
+<hr class="hr-ruler-blue">
+<br class="header-break">
+<div class="row mb-5">
+    <div class="col-md-6 mb-5">
+        <h3 class="text-primary-custom">Connect <i class="fas fa-link"></i></h3>
+        <br>
+        {% for contact_point in contact_points %}
+        <div class="row">
+            <div class="col-md m-auto">
+                <a href="{{ contact_point.t_site_url }}" target="_blank">
+                    <img src="{{ contact_point.t_site_logo.url }}" width="45%">
+                </a>
+            </div>
+            <div class="col-md m-auto">
+                <h3><a href="{{ contact_point.t_site_url }}" target="_blank">{{ contact_point.t_site }}</a></h3>
+                <p>{{ contact_point.t_blurb }}</p>
+            </div>
+        </div>
+        {% if not forloop.last %}<hr class="hr-ruler-gray">{% endif %}
+        {% endfor %}
+    </div>
+    <div class="col-md-6 mb-5">
+        <h3 class="text-primary-custom">Let's Talk <i class="fas fa-envelope"></i></h3>
+        <br>
+        <p class="text-muted font-italic">Send me a message and I'll get back to you right away.</p>
+        <form action="{% url 'contact_index' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ contact_form.name }}
+            </div>
+            <div class="form-group">
+                {{ contact_form.message }}
+            </div>
+            <div class="form-group">
+                {{ contact_form.spam_check }}
+            </div>
+            <button type="submit" class="btn btn-primary" id="submit-message">Send Message</button>
+        </form>
+        <br>
+        <p class="text-info">
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        </p>
+    </div>
+</div>
+{% endblock %}
+

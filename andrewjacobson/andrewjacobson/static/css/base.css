@@ -1,0 +1,71 @@
+html
+{
+    position: relative;
+    min-height: 100%;
+}
+body
+{
+    margin-bottom: 60px; /* Margin bottom by footer height */
+}
+.header-break
+{
+    display: block;
+    content: "";
+    margin-top: 60px;
+}
+/*
+This is for the navigation bar
+*/
+.navbar
+{
+    background-color: #1F497D;
+}
+
+.navbar-brand, .navbar-brand:hover, .navbar-brand:link
+{
+    color: white;
+}
+
+.nav-link
+{
+    color: white;
+}
+
+.nav-link:hover
+{
+    color: #87757D;
+}
+
+/***********************/
+.text-primary-custom
+{
+    color: #1F497D;
+}
+
+.hr-ruler-gray
+{
+    border: 1px solid #87757D;
+}
+.hr-ruler-blue
+{
+    border: 1px solid #1F497D;
+}
+
+/*
+This is for the icons
+*/
+.fas
+{
+    color: #1F497D;
+}
+.img-rounded
+{
+    border-radius: 10%;
+}
+/***********************/
+.footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    height: 60px;
+}

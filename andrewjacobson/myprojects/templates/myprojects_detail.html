@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<link rel="stylesheet" href="{% static 'myprojects/myprojects.css' %}"/>
+<br>
+<h1>{{ project.t_title }}</h1>
+<hr class="hr-ruler-blue">
+<h3 class="text-muted font-italic">{{ project.t_blurb }}</h3>
+<br class="header-break">
+<div class="row">
+    <div class="col-md-8">
+        <img src="{{ project.t_image_path.url }}" alt="" width="100%" class="img-rounded">
+    </div>
+    <div class="col-md-4">
+        <h3 class="text-primary-custom">Objective <i class="fas fa-question-circle"></i></h3>
+        <p>{{ project.t_objective }}</p>
+        <hr class="hr-ruler-gray">
+        <h3 class="text-primary-custom">Technology Used <i class="fas fa-wrench"></i></h3>
+        <p>{{ project.t_technology_used }}</p>
+        <hr class="hr-ruler-gray">
+        <h3 class="text-primary-custom">Code <i class="fas fa-code-branch"></i></h3>
+        <p>GitHub link coming soon!</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <br>
+        <h3 class="text-primary-custom">Details <i class="fas fa-search"></i></h3>
+        {{ project.t_details|safe }}
+        <hr class="hr-ruler-gray">
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <h3 class="text-primary-custom">Write Something <i class="fas fa-pen"></i></h3>
+        <br>
+        <form action="{% url 'myprojects_detail' project.pk %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.author }}
+            </div>
+            <div class="form-group">
+                {{ form.body }}
+            </div>
+            <div class="form-group">
+                {{ form.spam_check }}
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        </form>
+        <hr class="hr-ruler-gray">
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-md-8">
+        <h3 class="text-primary-custom">Comments <i class="fas fa-comments"></i></h3>
+            {% for comment in comments %}
+                <p class="text-muted">
+                    On {{ comment.s_written.date }},&nbsp;
+                    <b>{{ comment.t_author|safe }}</b> wrote:
+                </p>
+                <p>{{ comment.t_comment|safe }}</p>
+                {% if not forloop.last %}<hr class="hr-ruler-gray">{% endif %}
+            {% empty %}
+                <p>No comments</p>
+            {% endfor %}
+    </div>
+</div>
+<br>
+{% endblock %}
